@@ -32,6 +32,11 @@ namespace Analysis_Ip
                         result.AddressStart = args[i + 1];
                         break;
                     case "--address-mask":
+                        if (result.AddressStart == null)
+                        {
+                            Console.WriteLine("Ошибка: Параметр --address-mask не может быть использован без указания --address-start.");
+                            return null;
+                        }
                         result.AddressMask = ParseAddressMask(args[i + 1]);
                         break;
                 }
@@ -109,6 +114,8 @@ namespace Analysis_Ip
         {
             if (startAddress == null)
                 return logEntries;
+            if (mask == null)
+                return logEntries.Where(entry => IsInRange(entry.IPAddress, startAddress, 0)).ToList();
 
             return logEntries.Where(entry => IsInRange(entry.IPAddress, startAddress, mask)).ToList();
         }
