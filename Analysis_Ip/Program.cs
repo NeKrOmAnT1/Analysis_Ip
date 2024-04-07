@@ -104,7 +104,7 @@ namespace Analysis_Ip
                         var parts = line.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
                         if (parts.Length == 3)
                         {
-                            if (DateTime.TryParseExact($"{parts[1]} {parts[2]}", "yyyy.MM.dd HH:mm:ss", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime time))
+                            if (DateTime.TryParseExact($"{parts[1]} {parts[2]}", "yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime time))
                             {
                                 logEntries.Add(new LogEntry { IPAddress = parts[0], Time = time });
                             }
